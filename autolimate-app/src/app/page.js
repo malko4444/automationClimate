@@ -1,6 +1,6 @@
 
-import Speechtool from "../pages/VoiceAgent";
-import Hero from "../pages/Hero";
+import Speechtool from "./Components/VoiceAgent";
+import Hero from "./Components/Hero";
 
 export default function Home() {
   return (

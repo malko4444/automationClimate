@@ -13,7 +13,6 @@ const VoiceAgent = () => {
 
   const recognitionRef = useRef(null);
 
-  // 🧹 Cleanup when unmounting
   useEffect(() => {
     return () => {
       if (recognitionRef.current) recognitionRef.current.stop();
@@ -21,7 +20,6 @@ const VoiceAgent = () => {
     };
   }, []);
 
-  // 🎤 Initialize Speech Recognition
   const initializeSpeechRecognition = () => {
     if (!("webkitSpeechRecognition" in window)) {
       setError("Speech Recognition not supported in this browser.");
@@ -39,9 +37,7 @@ const VoiceAgent = () => {
       const latest = event.results[event.results.length - 1];
       if (latest.isFinal) {
         const spokenText = latest[0].transcript.trim();
-        // ✅ Append new spoken text instead of replacing
         setTranscript(spokenText);
-        // ✅ Send to backend including city
         sendToBackend(spokenText);
       }
     };
@@ -57,7 +53,6 @@ const VoiceAgent = () => {
     return true;
   };
 
-  // 🎙️ Start / Stop Recording
   const toggleRecording = () => {
     if (!recognitionRef.current) {
       const initialized = initializeSpeechRecognition();
@@ -159,7 +154,7 @@ const VoiceAgent = () => {
   };
 
   return (
-    <div className="w-[1120px] mx-auto my-10 bg-gradient-to-tr from-black to-gray-300 rounded-xl shadow-lg overflow-hidden">
+    <div className="w-[1120px] mx-auto my-10 bg-linear-to-tr from-black to-gray-300 rounded-xl shadow-lg overflow-hidden">
       <div className="px-6 py-8">
         <h2 className="text-3xl font-bold text-white text-center mb-6">
           Smart Voice AI Agent
